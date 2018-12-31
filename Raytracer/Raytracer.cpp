@@ -3,10 +3,37 @@
 
 #include "pch.h"
 #include <iostream>
+#include <fstream>
+#include "vec3.h"
 
-int main()
-{
-    std::cout << "Hello World!\n"; 
+using namespace std;
+
+int main() {
+
+	int filas = 200;
+	int columnas = 100;
+
+	ofstream img("Trazarayos.ppm");
+
+	img << "P3\n" << filas << " " << columnas << "\n255\n";
+	//std::cout << "P3\n" << filas << " " << columnas << "\n255\n";
+
+	for (int j = columnas-1; j >= 0; j--) {
+		for (int i = 0; i < filas; i++) {
+			
+			float red = float(i) / float(filas);
+			float green = float(j) / float(columnas + filas);
+			float blue = 0.8;
+
+			int intRed = int(255.99*red);
+			int intGreen = int(255.99*green);
+			int intBlue = int(255.99*blue);
+
+			img << intRed << " " << intGreen << " " << intBlue << "\n";
+			std::cout << intRed << " " << intGreen << " " << intBlue << "\n";
+		}
+	}
+	return 0;
 }
 
 // Ejecutar programa: Ctrl + F5 o menú Depurar > Iniciar sin depurar
